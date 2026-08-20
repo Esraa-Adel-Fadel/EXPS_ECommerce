@@ -54,7 +54,7 @@ model Category {
 model Order {
   id        String      @id @default(uuid())
   userId    String
-  User      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   total     Float
   status    OrderStatus @default(PENDING)
   createdAt DateTime    @default(now())
