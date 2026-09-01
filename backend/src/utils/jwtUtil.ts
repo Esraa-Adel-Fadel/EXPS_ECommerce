@@ -16,8 +16,14 @@ export const generateAccessToken= (payload : TokenPayload)=>{
 export const verifyAccessToken= (token : string)=>{
     return jwt.verify(
         token, 
-        process.env.ACCESS_TOKEN_SECRET || "fallback_secret_key_for_typescript"
-    ) as TokenPayload;
+        process.env.ACCESS_TOKEN_SECRET!,
+    )as unknown as TokenPayload;
+};
+export const verifyRefreshToken = (token: string) => {
+    return jwt.verify(
+        token, 
+        process.env.REFRESH_TOKEN_SECRET!,
+    )as unknown as { userId: string };
 };
 
 export const generateRefreshToken = (userId : string) =>{
