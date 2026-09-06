@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import { globalErrorHandler } from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import categoryRouter from './routes/categoryRoutes.js';
 import { AppError } from './utils/appError.js';
 
 dotenv.config();
@@ -19,6 +21,8 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
