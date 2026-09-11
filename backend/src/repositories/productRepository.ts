@@ -1,8 +1,17 @@
 import prisma from "../config/db.js";
 import { createProductInput, updateProductInput } from "../validators/productValidator.js";
 export class ProductRepository{
-    async findAllProducts(){
+    async findAllProducts(categoryId?: string, search?: string){
         return await prisma.product.findMany({
+            where: {
+                ...(categoryId && { categoryId }),
+            
+                ...(search && {
+                  title: {
+                    contains: search,
+                  },
+                }),
+              },
             include:{ category: true },
             orderBy:{
                 createdAt:"desc",

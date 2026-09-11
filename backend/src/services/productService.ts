@@ -3,8 +3,8 @@ import { AppError } from "../utils/appError.js";
 import { createProductInput, updateProductInput } from "../validators/productValidator.js";
 
 export class ProductService{
-    async getAllProducts(){
-        return await productRepository.findAllProducts();
+    async getAllProducts(categoryId?: string, search?: string){
+        return await productRepository.findAllProducts(categoryId, search);
     }
     async getProductById(id: string){
         const product = await productRepository.findById(id);

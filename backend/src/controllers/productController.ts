@@ -3,17 +3,31 @@ import { createProductSchema, updateProductSchema } from "../validators/productV
 import { productService } from "../services/productService.js";
 
 export class ProductController{
-    async getAll(req: Request , res: Response , next: NextFunction){
+    async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const products= await productService.getAllProducts();
-            return res.status(200).json({
-                status : "success",
-                data: products,
-            });
+          const categoryId =
+            typeof req.query.categoryId === "string"
+              ? req.query.categoryId
+              : undefined;
+      
+          const search =
+            typeof req.query.search === "string"
+              ? req.query.search
+              : undefined;
+      
+          const products = await productService.getAllProducts(
+            categoryId,
+            search
+          );
+      
+          return res.status(200).json({
+            status: "success",
+            data: products,
+          });
         } catch (err) {
-            next(err);
+          next(err);
         }
-    }
+      }
     async getOne(req: Request , res: Response , next: NextFunction){
         try {
             const id = req.params.id as string;

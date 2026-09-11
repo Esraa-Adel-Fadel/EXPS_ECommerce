@@ -3,7 +3,7 @@ import prisma from "../config/db.js";
 import { orderRepository } from "../repositories/orderRepository.js";
 import { AppError } from "../utils/appError.js";
 import { createOrderInput } from "../validators/orderValidator.js";
-import { th } from "zod/v4/locales";
+
 
 export class OrderService{
     async createOrder(userId: string , data : createOrderInput){
