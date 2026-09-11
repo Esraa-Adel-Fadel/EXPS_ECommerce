@@ -15,6 +15,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { About } from "./pages/About";
 import { Footer } from "./components/Footer";
 import { AdminDashboard } from "./pages/AdminDashboard";
+import { Profile } from "./pages/Profile";
 
 function App() {
   return (
@@ -31,12 +32,18 @@ function App() {
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<ProductDetails />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route element={<ProtectedRoute allowedRoles={["USER","ADMIN"]} />}>
+                
+                {/* Protected routes for logged in users */}
+                <Route element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]} />}>
                   <Route path="/orders" element={<MyOrders />} />
+                  <Route path="/profile" element={<Profile />} />
                 </Route>
+
+                {/* Protected routes for Admin */}
                 <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
                   <Route path="/admin" element={<AdminDashboard />} />
                 </Route>
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
