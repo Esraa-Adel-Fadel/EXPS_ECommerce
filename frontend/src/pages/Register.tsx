@@ -29,7 +29,7 @@ export const Register: React.FC = () => {
 
     try {
       await register({ name, email, password ,confirmPassword });
-      navigate("/");
+      navigate("/login");
     } catch (err: any) {
         const data = err.response?.data;
         if (data?.errors && typeof data.errors === "object" && !Array.isArray(data.errors)) {

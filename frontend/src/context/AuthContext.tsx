@@ -37,8 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setUser(res.user);
   };
   const register = async (data: RegisterPayload) => {
-    const res = await authService.register(data);
-    setUser(res.user);
+    await authService.register(data);
   };
   const logout = async () => {
     try {
