@@ -29,7 +29,7 @@ export interface ProductFormData {
   price: number;
   stock: number;
   description: string;
-  image: string;
+  imageURL?: string;
   categoryId: string;
 }
 

@@ -30,7 +30,7 @@ export const AdminDashboard = () => {
     price: 0,
     stock: 0,
     description: "",
-    image: "",
+    imageURL: "",
     categoryId: "",
   });
 
@@ -95,7 +95,7 @@ export const AdminDashboard = () => {
         price: product.price || 0,
         stock: product.stock ?? 0,
         description: product.description || "",
-        image: product.imageURL || "",
+        imageURL: product.imageURL || "",
         categoryId:
           product.categoryId ||
           (categories[0]?.id
@@ -111,7 +111,7 @@ export const AdminDashboard = () => {
         price: 0,
         stock: 0,
         description: "",
-        image: "",
+        imageURL: "",
         categoryId: categories[0]?.id
           ? String(categories[0].id)
           : "",
@@ -665,11 +665,11 @@ export const AdminDashboard = () => {
 
                 <input
                   type="url"
-                  value={formData.image}
+                  value={formData.imageURL}
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      image: e.target.value,
+                      imageURL: e.target.value,
                     })
                   }
                   className="w-full border border-stone-300 p-2.5 text-sm focus:outline-none focus:border-[#df5612]"

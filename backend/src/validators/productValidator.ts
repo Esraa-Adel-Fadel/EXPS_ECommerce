@@ -9,14 +9,18 @@ const titleSchema=z.preprocess(
     .min(1 , "Title is required")
     .min(3 , "Title must be at least 3 characters")
 );
-export const createProductSchema=z.object({
+export const createProductSchema = z.object({
     title: titleSchema,
     price: z.number().positive(),
-    stock:z.number().nonnegative(),
-    description:z.string().min(10,"Description must be at least 10 characters"),
-    isAvailable:z.boolean().optional(),
-    imageURL:z.string().url(),
-    categoryId:z.string().uuid(),   
+    stock: z.number().nonnegative(),
+    description: z.string().min(10, "Description must be at least 10 characters"),
+    isAvailable: z.boolean().optional(),
+    imageURL: z
+        .string()
+        .url("Invalid image URL")
+        .optional()
+        .or(z.literal("")),
+    categoryId: z.string().uuid(),
 });
 export const updateProductSchema=createProductSchema.partial();
 
