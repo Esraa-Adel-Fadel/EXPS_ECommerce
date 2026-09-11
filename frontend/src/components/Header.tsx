@@ -8,7 +8,6 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Products", path: "/products" },
-  { name: "AdminDashboard", path: "/admin" },
 ];
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,9 +71,30 @@ export const Header = () => {
               {item.name}
             </Link>
           ))}
+          {user?.role === "ADMIN" && (
+            <Link
+              to="/admin"
+              className="
+                        relative text-base font-medium text-stone-700
+                        transition-colors duration-300
+                        hover:text-[#df5612]
+                        after:absolute
+                        after:-bottom-2
+                        after:left-0
+                        after:h-[2px]
+                        after:w-0
+                        after:bg-[#df5612]
+                        after:transition-all
+                        after:duration-300
+                        hover:after:w-full
+                      "
+                              >
+                                Admin Dashboard
+                              </Link>
+                            )}
 
           {/* My Orders - USER only */}
-          {user&& (
+          {user && (
             <Link
               to="/orders"
               className="
@@ -242,6 +262,27 @@ export const Header = () => {
               My Orders
             </Link>
           )}
+          {user?.role === "ADMIN" && (
+            <Link
+              to="/admin"
+              className="
+                relative text-base font-medium text-stone-700
+                transition-colors duration-300
+                hover:text-[#df5612]
+                after:absolute
+                after:-bottom-2
+                after:left-0
+                after:h-[2px]
+                after:w-0
+                after:bg-[#df5612]
+                after:transition-all
+                after:duration-300
+                hover:after:w-full
+              "
+            >
+              Admin Dashboard
+            </Link>
+          )}ٍٍ
 
           {/* Mobile Actions */}
           <div className="flex items-center gap-5 py-4">
