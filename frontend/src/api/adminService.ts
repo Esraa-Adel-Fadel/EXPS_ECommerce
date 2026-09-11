@@ -27,43 +27,65 @@ export interface AdminUser {
 export interface ProductFormData {
   title: string;
   price: number;
+  stock: number;
   description: string;
   image: string;
   categoryId: string;
 }
 
 export const adminService = {
-   
-    getOrders: async () => {
-        try {
-          const response = await api.get("/orders/admin/all");
-          const result = 
-            response.data.allOrders || 
-            response.data.data || 
-            response.data.orders || 
-            response.data;
-      
-          return Array.isArray(result) ? result : [];
-        } catch (error: any) {
-          return [];
-        }
-      },
+  getOrders: async () => {
+    try {
+      const response = await api.get("/orders/admin/all");
+
+      const result =
+        response.data.allOrders ||
+        response.data.data ||
+        response.data.orders ||
+        response.data;
+
+      return Array.isArray(result) ? result : [];
+    } catch (error: any) {
+      return [];
+    }
+  },
+
   getUsers: async () => {
-    const response = await api.get<{ status: string; data: AdminUser[] }>("/users/admin/users");
+    const response = await api.get<{
+      status: string;
+      data: AdminUser[];
+    }>("/users/admin/users");
+
     return response.data.data;
   },
+
   deleteProduct: async (id: string) => {
-    const response = await api.delete<{ status: string; message: string }>(`/admin/products/${id}`);
+    const response = await api.delete<{
+      status: string;
+      message: string;
+    }>(`/products/${id}`);
+
     return response.data;
   },
 
   createProduct: async (productData: ProductFormData) => {
-    const response = await api.post<{ status: string; data: Product }>("/admin/products", productData);
+    const response = await api.post<{
+      status: string;
+      data: Product;
+    }>("/products", productData);
+
     return response.data.data;
   },
 
-  updateProduct: async (id: string, productData: Partial<ProductFormData>) => {
-    const response = await api.put<{ status: string; data: Product }>(`/admin/products/${id}`, productData);
+  updateProduct: async (
+    id: string,
+    productData: Partial<ProductFormData>
+  ) => {
+    const response = await api.patch<{
+      status: string;
+      data: Product;
+    }>(`/products/${id}`, productData);
+
     return response.data.data;
   },
 };

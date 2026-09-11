@@ -17,11 +17,13 @@ api.interceptors.response.use(
               _retry?: boolean;
           };
 
-      if (
-          error.response?.status === 401 &&
-          !originalRequest._retry &&
-          !originalRequest.url?.includes("/auth/refresh")
-      ) {
+          if (
+            error.response?.status === 401 &&
+            !originalRequest._retry &&
+            !originalRequest.url?.includes("/auth/login") &&
+            !originalRequest.url?.includes("/auth/register") &&
+            !originalRequest.url?.includes("/auth/refresh")
+          ) {
           originalRequest._retry = true;
 
           try {
@@ -29,7 +31,6 @@ api.interceptors.response.use(
 
               return api(originalRequest);
           } catch (refreshError) {
-              window.location.href = "/login";
               return Promise.reject(refreshError);
           }
       }
